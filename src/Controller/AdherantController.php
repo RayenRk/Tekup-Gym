@@ -79,3 +79,4 @@ class AdherantController extends AbstractController
         return $this->redirectToRoute('app_adherant_index', [], Response::HTTP_SEE_OTHER);
     }
 }
+//nothing
