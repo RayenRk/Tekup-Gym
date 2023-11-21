@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AbonnementRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -25,6 +27,17 @@ class Abonnement
 
     #[ORM\Column(nullable: true)]
     private ?float $prix = null;
+
+    #[ORM\ManyToOne(inversedBy: 'abonnement')]
+    private ?Adherant $adherant = null;
+
+    #[ORM\ManyToMany(targetEntity: Categorie::class, mappedBy: 'abonnement')]
+    private Collection $categories;
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -75,6 +88,45 @@ class Abonnement
     public function setPrix(?float $prix): static
     {
         $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getAdherant(): ?Adherant
+    {
+        return $this->adherant;
+    }
+
+    public function setAdherant(?Adherant $adherant): static
+    {
+        $this->adherant = $adherant;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Categorie>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Categorie $category): static
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+            $category->addAbonnement($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Categorie $category): static
+    {
+        if ($this->categories->removeElement($category)) {
+            $category->removeAbonnement($this);
+        }
 
         return $this;
     }

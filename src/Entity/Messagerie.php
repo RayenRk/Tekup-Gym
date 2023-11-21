@@ -18,7 +18,13 @@ class Messagerie
     private ?string $contenu = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $date = null;
+    private ?\DateTimeInterface $date_message = null;
+
+    #[ORM\ManyToOne(inversedBy: 'messageries')]
+    private ?Adherant $adherant = null;
+
+    #[ORM\ManyToOne(inversedBy: 'messageries')]
+    private ?Coach $coach = null;
 
     public function getId(): ?int
     {
@@ -37,14 +43,38 @@ class Messagerie
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDateMessage(): ?\DateTimeInterface
     {
-        return $this->date;
+        return $this->date_message;
     }
 
-    public function setDate(?\DateTimeInterface $date): static
+    public function setDateMessage(?\DateTimeInterface $date_message): static
     {
-        $this->date = $date;
+        $this->date_message = $date_message;
+
+        return $this;
+    }
+
+    public function getAdherant(): ?Adherant
+    {
+        return $this->adherant;
+    }
+
+    public function setAdherant(?Adherant $adherant): static
+    {
+        $this->adherant = $adherant;
+
+        return $this;
+    }
+
+    public function getCoach(): ?Coach
+    {
+        return $this->coach;
+    }
+
+    public function setCoach(?Coach $coach): static
+    {
+        $this->coach = $coach;
 
         return $this;
     }
