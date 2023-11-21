@@ -6,6 +6,12 @@ use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\InheritanceType('JOINED')]
+#[ORM\DiscriminatorColumn(name: 'user_type', type: 'string')]
+#[ORM\DiscriminatorMap(['user' => User::class,
+                        'administrator' => Administrator::class,
+                        'coach'=> Coach::class,
+                        'adherant'=> Adherant::class])]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
 {
@@ -15,22 +21,22 @@ class User
     private ?int $id = null;
 
     #[ORM\Column(length: 100, nullable: true)]
-    private ?string $nom = null;
+    protected ?string $nom = null;
 
     #[ORM\Column(length: 100, nullable: true)]
-    private ?string $prenom = null;
+    protected ?string $prenom = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $date_naissance = null;
+    protected ?\DateTimeInterface $date_naissance = null;
 
     #[ORM\Column(type: Types::BIGINT, nullable: true)]
-    private ?string $cin = null;
+    protected ?string $cin = null;
 
     #[ORM\Column(length: 100, nullable: true)]
-    private ?string $email = null;
+    protected ?string $email = null;
 
     #[ORM\Column(length: 100, nullable: true)]
-    private ?string $password = null;
+    protected ?string $password = null;
 
     public function getId(): ?int
     {

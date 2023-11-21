@@ -10,10 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: CoachRepository::class)]
 class Coach extends User
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $annee_experience = null;
@@ -29,10 +25,7 @@ class Coach extends User
         $this->messageries = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+
 
     public function getAnneeExperience(): ?int
     {

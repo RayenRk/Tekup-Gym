@@ -8,12 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AdherantRepository::class)]
-class Adherant
+class Adherant extends User
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
 
     #[ORM\OneToMany(mappedBy: 'adherant', targetEntity: Abonnement::class)]
     private Collection $abonnement;
@@ -27,10 +23,6 @@ class Adherant
         $this->messageries = new ArrayCollection();
     }
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     /**
      * @return Collection<int, Abonnement>
