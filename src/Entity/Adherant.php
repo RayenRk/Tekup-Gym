@@ -17,10 +17,14 @@ class Adherant extends User
     #[ORM\OneToMany(mappedBy: 'adherant', targetEntity: Messagerie::class)]
     private Collection $messageries;
 
+    #[ORM\OneToMany(mappedBy: 'adherant', targetEntity: User::class)]
+    private Collection $useradh;
+
     public function __construct()
     {
         $this->abonnement = new ArrayCollection();
         $this->messageries = new ArrayCollection();
+        $this->useradh = new ArrayCollection();
     }
 
 
@@ -78,6 +82,36 @@ class Adherant extends User
             // set the owning side to null (unless already changed)
             if ($messagery->getAdherant() === $this) {
                 $messagery->setAdherant(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUseradh(): Collection
+    {
+        return $this->useradh;
+    }
+
+    public function addUseradh(User $useradh): static
+    {
+        if (!$this->useradh->contains($useradh)) {
+            $this->useradh->add($useradh);
+            $useradh->setAdherant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUseradh(User $useradh): static
+    {
+        if ($this->useradh->removeElement($useradh)) {
+            // set the owning side to null (unless already changed)
+            if ($useradh->getAdherant() === $this) {
+                $useradh->setAdherant(null);
             }
         }
 

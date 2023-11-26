@@ -38,6 +38,15 @@ class User
     #[ORM\Column(length: 100, nullable: true)]
     protected ?string $password = null;
 
+    #[ORM\ManyToOne(inversedBy: 'useradh')]
+    private ?Adherant $adherant = null;
+
+    #[ORM\ManyToOne(inversedBy: 'usercoh')]
+    private ?Coach $coach = null;
+
+    #[ORM\ManyToOne(inversedBy: 'useradm')]
+    private ?Administrator $administrator = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -111,6 +120,42 @@ class User
     public function setPassword(?string $password): static
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getAdherant(): ?Adherant
+    {
+        return $this->adherant;
+    }
+
+    public function setAdherant(?Adherant $adherant): static
+    {
+        $this->adherant = $adherant;
+
+        return $this;
+    }
+
+    public function getCoach(): ?Coach
+    {
+        return $this->coach;
+    }
+
+    public function setCoach(?Coach $coach): static
+    {
+        $this->coach = $coach;
+
+        return $this;
+    }
+
+    public function getAdministrator(): ?Administrator
+    {
+        return $this->administrator;
+    }
+
+    public function setAdministrator(?Administrator $administrator): static
+    {
+        $this->administrator = $administrator;
 
         return $this;
     }

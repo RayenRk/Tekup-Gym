@@ -20,9 +20,13 @@ class Coach extends User
     #[ORM\ManyToOne(inversedBy: 'coaches')]
     private ?Categorie $categorie = null;
 
+    #[ORM\OneToMany(mappedBy: 'coach', targetEntity: User::class)]
+    private Collection $usercoh;
+
     public function __construct()
     {
         $this->messageries = new ArrayCollection();
+        $this->usercoh = new ArrayCollection();
     }
 
 
@@ -77,6 +81,36 @@ class Coach extends User
     public function setCategorie(?Categorie $categorie): static
     {
         $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsercoh(): Collection
+    {
+        return $this->usercoh;
+    }
+
+    public function addUsercoh(User $usercoh): static
+    {
+        if (!$this->usercoh->contains($usercoh)) {
+            $this->usercoh->add($usercoh);
+            $usercoh->setCoach($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUsercoh(User $usercoh): static
+    {
+        if ($this->usercoh->removeElement($usercoh)) {
+            // set the owning side to null (unless already changed)
+            if ($usercoh->getCoach() === $this) {
+                $usercoh->setCoach(null);
+            }
+        }
 
         return $this;
     }
