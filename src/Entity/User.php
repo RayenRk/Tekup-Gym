@@ -38,14 +38,11 @@ class User
     #[ORM\Column(length: 100, nullable: true)]
     protected ?string $password = null;
 
-    #[ORM\ManyToOne(inversedBy: 'useradh')]
-    private ?Adherant $adherant = null;
 
-    #[ORM\ManyToOne(inversedBy: 'usercoh')]
-    private ?Coach $coach = null;
 
-    #[ORM\ManyToOne(inversedBy: 'useradm')]
-    private ?Administrator $administrator = null;
+    public function __construct()
+    {
+    }
 
     public function getId(): ?int
     {

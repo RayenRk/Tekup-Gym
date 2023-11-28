@@ -1,11 +1,57 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter Coach</title>
+    <link rel="stylesheet" href="{{ asset("addcoach.css") }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="container">
+    <div class="title">Nouveau Coach</div>
+    <div class="content">
+        {{ form_start(form) }}
+        <div class="user-details">
+            <div class="input-box">
+                {{ form_label(form.nom, 'Nom') }}
+                {{ form_widget(form.nom) }}
+            </div>
+            <div class="input-box">
+                {{ form_label(form.prenom, 'Prenom') }}
+                {{ form_widget(form.prenom) }}
+            </div>
+            <div class="input-box">
+                {{ form_label(form.cin, 'CIN') }}
+                {{ form_widget(form.cin) }}
+            </div>
+            <div class="input-box">
+                {{ form_label(form.date_naissance, 'Date de naissance') }}
+                {{ form_widget(form.date_naissance) }}
+            </div>
+            <div class="input-box">
+                {{ form_label(form.email, 'Email') }}
+                {{ form_widget(form.email) }}
+            </div>
+            <div class="input-box">
+                {{ form_label(form.password, 'Password') }}
+                {{ form_widget(form.password) }}
+            </div>
+            <div class="input-box">
+                {{ form_label(form.annee_experience, 'annee_experience') }}
+                {{ form_widget(form.annee_experience) }}
+            </div>
+            <div class="input-box">
+                {{ form_label(form.categorie, 'Categorie') }}
+                {{ form_widget(form.categorie) }}
+            </div>
 
-{% block title %}New Coach{% endblock %}
 
-{% block body %}
-    <h1>Create new Coach</h1>
-
-    {{ include('coach/_form.html.twig') }}
-
-    <a href="{{ path('app_coach_index') }}">back to list</a>
-{% endblock %}
+        </div>
+        <div class="button">
+            <input type="submit" value="Register">
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+</body>
+</html>

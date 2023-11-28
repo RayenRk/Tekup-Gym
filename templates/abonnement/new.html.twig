@@ -1,11 +1,47 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}New Abonnement{% endblock %}
-
-{% block body %}
-    <h1>Create new Abonnement</h1>
-
-    {{ include('abonnement/_form.html.twig') }}
-
-    <a href="{{ path('app_abonnement_index') }}">back to list</a>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter Abonnement</title>
+    <link rel="stylesheet" href="{{ asset("addabonnement.css") }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="container">
+    <div class="title">Nouvel Abonnement</div>
+    <div class="content">
+        {{ form_start(form) }}
+        <div class="user-details">
+            <div class="input-box">
+                {{ form_label(form.type, 'Type') }}
+                {{ form_widget(form.type) }}
+            </div>
+            <div class="input-box adherant-input">
+                {{ form_label(form.adherant, 'Adherent') }}
+                {{ form_widget(form.adherant) }}
+            </div>
+            <div class="input-box date-input">
+                {{ form_label(form.date_expiration, 'Date d\'expiration') }}
+                {{ form_widget(form.date_expiration) }}
+            </div>
+            <div class="input-box date-input">
+                {{ form_label(form.date_debut, 'Date de début') }}
+                {{ form_widget(form.date_debut) }}
+            </div>
+            <div class="input-box categories-input">
+                {{ form_label(form.categories, 'Categories') }}
+                {{ form_widget(form.categories) }}
+            </div>
+            <div class="input-box">
+                {{ form_label(form.prix, 'Prix') }}
+                {{ form_widget(form.prix) }}
+            </div>
+        </div>
+        <div class="button">
+            <input type="submit" value="Enregistrer">
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+</body>
+</html>

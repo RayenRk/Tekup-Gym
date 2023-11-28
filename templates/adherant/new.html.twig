@@ -1,11 +1,53 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter Adherant</title>
+    <link rel="stylesheet" href="{{ asset("add_adherant.css") }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="container">
+    <div class="title">Nouveau Adherant</div>
+    <div class="content">
+        {{ form_start(form) }}
+        <div class="user-details">
+            <div class="input-box">
+                {{ form_label(form.nom, 'Nom') }}
+                {{ form_widget(form.nom) }}
+            </div>
+            <div class="input-box">
+                {{ form_label(form.prenom, 'Prenom') }}
+                {{ form_widget(form.prenom) }}
+            </div>
+            <div class="input-box">
+                {{ form_label(form.cin, 'CIN') }}
+                {{ form_widget(form.cin) }}
+            </div>
+            <div class="input-box">
+                {{ form_label(form.date_naissance, 'Date de naissance') }}
+                {{ form_widget(form.date_naissance) }}
+            </div>
+            <div class="input-box">
+                {{ form_label(form.email, 'Email') }}
+                {{ form_widget(form.email) }}
+            </div>
+            <div class="input-box">
+                {{ form_label(form.password, 'Password') }}
+                {{ form_widget(form.password) }}
+            </div>
 
-{% block title %}New Adherant{% endblock %}
+        </div>
+        <div class="input-box-gender">
+            {{ form_label(form.gender, 'Gender') }}
+            {{ form_widget(form.gender) }}
+        </div>
 
-{% block body %}
-    <h1>Create new Adherant</h1>
-
-    {{ include('adherant/_form.html.twig') }}
-
-    <a href="{{ path('app_adherant_index') }}">back to list</a>
-{% endblock %}
+        <div class="button">
+            <input type="submit" value="Register">
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+</body>
+</html>

@@ -24,10 +24,14 @@ class Categorie
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Coach::class)]
     private Collection $coaches;
 
+    #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Abonnement::class)]
+    private Collection $abonn;
+
     public function __construct()
     {
         $this->abonnement = new ArrayCollection();
         $this->coaches = new ArrayCollection();
+        $this->abonn = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -95,6 +99,36 @@ class Categorie
             // set the owning side to null (unless already changed)
             if ($coach->getCategorie() === $this) {
                 $coach->setCategorie(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Abonnement>
+     */
+    public function getAbonn(): Collection
+    {
+        return $this->abonn;
+    }
+
+    public function addAbonn(Abonnement $abonn): static
+    {
+        if (!$this->abonn->contains($abonn)) {
+            $this->abonn->add($abonn);
+            $abonn->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAbonn(Abonnement $abonn): static
+    {
+        if ($this->abonn->removeElement($abonn)) {
+            // set the owning side to null (unless already changed)
+            if ($abonn->getCategorie() === $this) {
+                $abonn->setCategorie(null);
             }
         }
 

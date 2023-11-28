@@ -34,6 +34,9 @@ class Abonnement
     #[ORM\ManyToMany(targetEntity: Categorie::class, mappedBy: 'abonnement')]
     private Collection $categories;
 
+    #[ORM\ManyToOne(inversedBy: 'abonn')]
+    private ?Categorie $categorie = null;
+
     public function __construct()
     {
         $this->categories = new ArrayCollection();
@@ -127,6 +130,18 @@ class Abonnement
         if ($this->categories->removeElement($category)) {
             $category->removeAbonnement($this);
         }
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): static
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }

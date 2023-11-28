@@ -10,6 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: AdherantRepository::class)]
 class Adherant extends User
 {
+    #[ORM\Column(length: 10, nullable: true)]
+    private ?string $gender = null;
 
     #[ORM\OneToMany(mappedBy: 'adherant', targetEntity: Abonnement::class)]
     private Collection $abonnement;
@@ -22,11 +24,23 @@ class Adherant extends User
 
     public function __construct()
     {
+        parent::__construct();
         $this->abonnement = new ArrayCollection();
         $this->messageries = new ArrayCollection();
         $this->useradh = new ArrayCollection();
     }
 
+    public function getGender(): ?string
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?string $gender): self
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
 
     /**
      * @return Collection<int, Abonnement>
@@ -36,7 +50,7 @@ class Adherant extends User
         return $this->abonnement;
     }
 
-    public function addAbonnement(Abonnement $abonnement): static
+    public function addAbonnement(Abonnement $abonnement): self
     {
         if (!$this->abonnement->contains($abonnement)) {
             $this->abonnement->add($abonnement);
@@ -46,7 +60,7 @@ class Adherant extends User
         return $this;
     }
 
-    public function removeAbonnement(Abonnement $abonnement): static
+    public function removeAbonnement(Abonnement $abonnement): self
     {
         if ($this->abonnement->removeElement($abonnement)) {
             // set the owning side to null (unless already changed)
@@ -66,7 +80,7 @@ class Adherant extends User
         return $this->messageries;
     }
 
-    public function addMessagery(Messagerie $messagery): static
+    public function addMessagery(Messagerie $messagery): self
     {
         if (!$this->messageries->contains($messagery)) {
             $this->messageries->add($messagery);
@@ -76,7 +90,7 @@ class Adherant extends User
         return $this;
     }
 
-    public function removeMessagery(Messagerie $messagery): static
+    public function removeMessagery(Messagerie $messagery): self
     {
         if ($this->messageries->removeElement($messagery)) {
             // set the owning side to null (unless already changed)
@@ -96,7 +110,7 @@ class Adherant extends User
         return $this->useradh;
     }
 
-    public function addUseradh(User $useradh): static
+    public function addUseradh(User $useradh): self
     {
         if (!$this->useradh->contains($useradh)) {
             $this->useradh->add($useradh);
@@ -106,7 +120,7 @@ class Adherant extends User
         return $this;
     }
 
-    public function removeUseradh(User $useradh): static
+    public function removeUseradh(User $useradh): self
     {
         if ($this->useradh->removeElement($useradh)) {
             // set the owning side to null (unless already changed)

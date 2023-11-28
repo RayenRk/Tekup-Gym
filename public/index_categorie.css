@@ -1,0 +1,119 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Set global font-family */
+body {
+    padding: 20px;
+    background: linear-gradient(135deg, #3498db, #2c3e50); /* Updated background color */
+    font-family: 'Poppins', sans-serif;
+    color: #fff;
+}
+
+/* Card container styles */
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Card styles */
+.card {
+    max-width: max-content;
+    width: 100%;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.card h1{
+    color: #0c0101;
+}
+/* Improve table styles */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.table th, .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table th {
+    background-color: #3498db; /* Updated table header background color */
+    color: #fff;
+}
+
+.table td {
+    color: #0c0101;
+    background-color: #f5f5f5;
+}
+
+/* Enhance link styles */
+.action-link, .create-link {
+    display: inline-block;
+    padding: 10px;
+    margin-right: 10px;
+    background: #3498db; /* Updated link background color */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.action-link:hover, .create-link:hover {
+    background: #2980b9; /* Updated link hover background color */
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #3498db;
+    color: #fff;
+    padding: 15px; /* Updated padding for the navbar */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.nav-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 20px; /* Updated margin for the navbar links */
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #ecf0f1; /* Updated link hover color */
+}
+
+/* Footer styles */
+.footer {
+    background-color: #34495e;
+    color: #fff;
+    text-align: center;
+    padding: 15px; /* Updated padding for the footer */
+    margin-top: auto;
+}

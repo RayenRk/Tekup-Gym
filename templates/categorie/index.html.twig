@@ -1,11 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Categorie index{% endblock %}
+{% block title %}Catégorie{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset("index_categorie.css") }}">
+{% endblock %}
 
 {% block body %}
-    <h1>Categorie index</h1>
+<div class="wrapper">
+    <header class="navbar">
+        <a href="{{ path('app_adherant_new') }}" class="logo">
+            <img src="{{ asset("images/logo.png") }}" alt="Your Logo">
+        </a>
+        <nav class="nav-links">
+            <a href="{{ path('app_adherant_new') }}">Home</a>
+            <a href="{{ path('app_adherant_new') }}">About</a>
+            <a href="{{ path('app_adherant_new') }}">Contact</a>
+        </nav>
+    </header>
 
-    <table class="table">
+    <div class="card-container">
+        <div class="card">
+            <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -30,6 +46,11 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a href="{{ path('app_categorie_new') }}">Create new</a>
+            <a href="{{ path('app_categorie_new') }}" class="create-link">Create New </a>
+        </div>
+    </div>
+</div>
+    <footer class="footer">
+        <p>&copy; 2023 Your Company. All rights reserved.</p>
+    </footer>
 {% endblock %}
