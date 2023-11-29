@@ -23,7 +23,7 @@ class HomeController extends AbstractController
     #[Route('/login', name: 'login_page', methods: ['GET'])]
     public function login(): Response
     {
-        return $this->render('login.html.twig', [
+        return $this->render('login1.html.twig', [
         ]);
     }
 
