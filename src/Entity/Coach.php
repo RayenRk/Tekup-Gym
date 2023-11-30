@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CoachRepository::class)]
+#[ORM\Table(name: "Coach")]
 class Coach extends User
 {
 

@@ -3,8 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Coach;
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,14 +34,15 @@ class CoachType extends AbstractType
             ->add('email', TextType::class, [
                 'label' => 'Email',
             ])
-            ->add('password', TextType::class, [
+            ->add('password', PasswordType::class, [
                 'label' => 'Mot de passe',
             ])
             ->add('annee_experience', IntegerType::class, [
                 'label' => 'Année d\'expérience',
             ])
-            ->add('categorie', null, [
+            ->add('categorie', ChoiceType::class, [
                 'label' => 'Catégorie',
+
             ])
             // Add any other fields from the User class as needed
         ;
@@ -47,7 +51,7 @@ class CoachType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Coach::class,
+            'data_class' => User::class,
         ]);
     }
 }

@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: AdherantRepository::class)]
 class Adherant extends User
 {
+
     #[ORM\Column(length: 10, nullable: true)]
     private ?string $gender = null;
 

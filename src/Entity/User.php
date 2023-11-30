@@ -3,24 +3,26 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use App\Repository\UserSECURITYRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\InheritanceType('JOINED')]
-#[ORM\DiscriminatorColumn(name: 'user_type', type: 'string')]
-#[ORM\DiscriminatorMap(['user' => User::class,
-                        'administrator' => Administrator::class,
-                        'coach'=> Coach::class,
-                        'adherant'=> Adherant::class])]
-#[ORM\Entity(repositoryClass: UserRepository::class)]
-class User
+#[ORM\Entity(repositoryClass: UserSECURITYRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100, nullable: true)]
+    #[ORM\Column(length: 100, nullable: false)]
     protected ?string $nom = null;
 
     #[ORM\Column(length: 100, nullable: true)]
@@ -37,16 +39,19 @@ class User
 
     #[ORM\Column(length: 100, nullable: true)]
     protected ?string $password = null;
+    
+     #[ORM\Column(type:"json")]
 
-
-
-    public function __construct()
-    {
-    }
+    private array $roles = [];
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(?int $id): void
+    {
+        $this->id = $id;
     }
 
     public function getNom(): ?string
@@ -54,11 +59,9 @@ class User
         return $this->nom;
     }
 
-    public function setNom(?string $nom): static
+    public function setNom(?string $nom): void
     {
         $this->nom = $nom;
-
-        return $this;
     }
 
     public function getPrenom(): ?string
@@ -66,11 +69,9 @@ class User
         return $this->prenom;
     }
 
-    public function setPrenom(?string $prenom): static
+    public function setPrenom(?string $prenom): void
     {
         $this->prenom = $prenom;
-
-        return $this;
     }
 
     public function getDateNaissance(): ?\DateTimeInterface
@@ -78,11 +79,9 @@ class User
         return $this->date_naissance;
     }
 
-    public function setDateNaissance(?\DateTimeInterface $date_naissance): static
+    public function setDateNaissance(?\DateTimeInterface $date_naissance): void
     {
         $this->date_naissance = $date_naissance;
-
-        return $this;
     }
 
     public function getCin(): ?string
@@ -90,11 +89,9 @@ class User
         return $this->cin;
     }
 
-    public function setCin(?string $cin): static
+    public function setCin(?string $cin): void
     {
         $this->cin = $cin;
-
-        return $this;
     }
 
     public function getEmail(): ?string
@@ -102,11 +99,9 @@ class User
         return $this->email;
     }
 
-    public function setEmail(?string $email): static
+    public function setEmail(?string $email): void
     {
         $this->email = $email;
-
-        return $this;
     }
 
     public function getPassword(): ?string
@@ -114,12 +109,52 @@ class User
         return $this->password;
     }
 
-    public function setPassword(?string $password): static
+    public function setPassword(?string $password): void
     {
         $this->password = $password;
-
-        return $this;
     }
+
+    public function getRoles(): array
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(array $roles): void
+    {
+        $this->roles = $roles;
+    }
+
+    /**
+     * @param int|null $id
+     * @param string|null $nom
+     * @param string|null $prenom
+     * @param \DateTimeInterface|null $date_naissance
+     * @param string|null $cin
+     * @param string|null $email
+     * @param string|null $password
+     * @param array $roles
+     */
+    public function __construct()
+    {
+
+    }
+
+
+    public function getUserIdentifier(): string
+    {
+        return (string) $this->email;
+    }
+
+    public function eraseCredentials(): void
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
+    }
+
+    // You may need to implement other required methods like `getSalt` and `equals`.
+
+
+
 
     public function getAdherant(): ?Adherant
     {

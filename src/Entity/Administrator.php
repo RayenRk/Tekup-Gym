@@ -8,9 +8,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AdministratorRepository::class)]
+#[ORM\Table(name: "administrator")]
 class Administrator extends User
 {
     #[ORM\OneToMany(mappedBy: 'administrator', targetEntity: User::class)]
+
     private Collection $useradm;
 
     public function __construct()

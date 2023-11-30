@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\UserSECURITY;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -10,19 +10,19 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
 
 /**
- * @extends ServiceEntityRepository<UserSECURITY>
-* @implements PasswordUpgraderInterface<UserSECURITY>
+ * @extends ServiceEntityRepository<User>
+* @implements PasswordUpgraderInterface<User>
  *
- * @method UserSECURITY|null find($id, $lockMode = null, $lockVersion = null)
- * @method UserSECURITY|null findOneBy(array $criteria, array $orderBy = null)
- * @method UserSECURITY[]    findAll()
- * @method UserSECURITY[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method User|null find($id, $lockMode = null, $lockVersion = null)
+ * @method User|null findOneBy(array $criteria, array $orderBy = null)
+ * @method User[]    findAll()
+ * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class UserSECURITYRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, UserSECURITY::class);
+        parent::__construct($registry, User::class);
     }
 
     /**
@@ -30,7 +30,7 @@ class UserSECURITYRepository extends ServiceEntityRepository implements Password
      */
     public function upgradePassword(PasswordAuthenticatedUserInterface $user, string $newHashedPassword): void
     {
-        if (!$user instanceof UserSECURITY) {
+        if (!$user instanceof User) {
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $user::class));
         }
 
@@ -40,7 +40,7 @@ class UserSECURITYRepository extends ServiceEntityRepository implements Password
     }
 
 //    /**
-//     * @return UserSECURITY[] Returns an array of UserSECURITY objects
+//     * @return User[] Returns an array of User objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class UserSECURITYRepository extends ServiceEntityRepository implements Password
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?UserSECURITY
+//    public function findOneBySomeField($value): ?User
 //    {
 //        return $this->createQueryBuilder('u')
 //            ->andWhere('u.exampleField = :val')
