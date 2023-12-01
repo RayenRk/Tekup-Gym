@@ -1,0 +1,20 @@
+{# templates/imcvue/result.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultat de l'IMC{% endblock %}
+
+{% block body %}
+    <h1>Résultat de l'IMC</h1>
+
+    {# Affichage du formulaire #}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    <button type="submit">Calculer l'IMC</button>
+    {{ form_end(form) }}
+
+    {% if imcvue is not null %}
+        <h2>Votre IMC est : {{ imcvue }}</h2>
+    {% endif %}
+{% endblock %}

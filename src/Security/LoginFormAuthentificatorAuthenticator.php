@@ -44,9 +44,18 @@ class LoginFormAuthentificatorAuthenticator extends AbstractLoginFormAuthenticat
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        $user = $token->getUser();
+        if(in_array('ROLE_COACH', $user->getRoles(),true)) {
+            return new RedirectResponse($this->urlGenerator->generate('coachdashboard'));
+        }
+
+        if(in_array('ROLE_ADHERANT', $user->getRoles(),true)) {
+            return new RedirectResponse($this->urlGenerator->generate('adherantdashboard'));
+        }
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
+
          return new RedirectResponse($this->urlGenerator->generate('app_coach_index'));
         // For example:w
         // return new RedirectResponse($this->urlGenerator->generate('some_route'));

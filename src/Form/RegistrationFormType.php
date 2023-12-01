@@ -41,7 +41,7 @@ class RegistrationFormType extends AbstractType
         ->add('roles', ChoiceType::class, [
             'choices' => [
                 'Coach' => 'ROLE_COACH',
-                'Adherant' => 'ROLE_USER',
+                'Adherant' => 'ROLE_ADHERANT',
                 // Add other roles as needed
             ],
             'multiple' => true,

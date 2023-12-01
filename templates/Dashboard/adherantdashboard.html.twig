@@ -1,0 +1,22 @@
+{# adherant.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profil Adhérent</title>
+</head>
+<body>
+<h1>Profil adherant</h1>
+
+{# Affichage des informations de l'utilisateur #}
+<p>Nom: {{ app.user.nom }}</p>
+<p>Prénom: {{ app.user.prenom }}</p>
+<p>Date de naissance: {{ app.user.dateNaissance|date('Y-m-d') }}</p>
+<p>Email: {{ app.user.email }}</p>
+<form action="{{ path('imccontroller') }}" method="GET">
+    <button type="submit">Calculer IMC</button>
+</form>
+
+{# ... #}
+</body>
+</html>
