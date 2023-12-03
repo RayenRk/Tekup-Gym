@@ -2,18 +2,77 @@
 
 {% block title %}Register{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        .card {
+            border: 0;
+            border-radius: 15px;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+        }
+        .card-body {
+            padding: 2rem;
+        }
+        .btn-primary {
+            background-color: #3490dc;
+            border-color: #3490dc;
+        }
+        .btn-primary:hover {
+            background-color: #2771b2;
+            border-color: #2771b2;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
-    <h1>Register</h1>
+    <div class="container mt-5">
+        <div class="card shadow">
+            <div class="card-body p-4">
+                <h2 class="text-center mb-4">Register</h2>
 
-    {{ form_errors(registrationForm) }}
+                {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                {{ form_start(registrationForm) }}
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(registrationForm.nom, {'attr': {'class': 'form-control', 'placeholder': 'Last Name'}}) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(registrationForm.prenom, {'attr': {'class': 'form-control', 'placeholder': 'First Name'}}) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        {{ form_row(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form_row(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Password'}}) }}
+                    </div>
+                </div>
+                {{ form_row(registrationForm.cin, {'attr': {'class': 'form-control', 'placeholder': 'ID Number'}}) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                {{ form_row(registrationForm.date_naissance, {'attr': {'class': 'form-control', 'placeholder': 'Date of Birth'}}) }}
+                <div class="form-group">
+                    {{ form_label(registrationForm.roles, 'User Type', {'label_attr': {'class': 'font-weight-bold'}}) }}
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text bg-primary text-white" for="{{ registrationForm.roles.vars.id }}">Choose</label>
+                        </div>
+                        {{ form_widget(registrationForm.roles, {'attr': {'class': 'custom-select'}}) }}
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

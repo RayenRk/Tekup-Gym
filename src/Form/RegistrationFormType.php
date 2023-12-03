@@ -37,7 +37,7 @@ class RegistrationFormType extends AbstractType
         ->add('email', EmailType::class, [
             'label' => 'Email',
         ])
-       
+
         ->add('roles', ChoiceType::class, [
             'choices' => [
                 'Coach' => 'ROLE_COACH',
@@ -48,14 +48,7 @@ class RegistrationFormType extends AbstractType
             'required' => false, // Allow the field to be empty
             'empty_data' => [], // Default value if the field is empty
         ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
+
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller

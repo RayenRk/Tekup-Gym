@@ -15,11 +15,17 @@ class ImcType extends AbstractType
         $builder
             ->add('weight', NumberType::class, [
                 'label' => 'Poids (en kg)',
-                'attr' => ['placeholder' => 'Entrez votre poids en kilogrammes'],
+                'attr' => [
+                    'placeholder' => 'Entrez votre poids en kilogrammes',
+
+                ],
             ])
             ->add('height', NumberType::class, [
                 'label' => 'Taille (en cm)',
-                'attr' => ['placeholder' => 'Entrez votre taille en centimètres'],
+                'attr' => [
+                    'placeholder' => 'Entrez votre taille en centimètres',
+
+                ],
             ]);
     }
 

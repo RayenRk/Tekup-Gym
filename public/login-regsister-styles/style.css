@@ -1,0 +1,39 @@
+/* Add your custom styles here if needed */
+
+.container {
+    margin-top: 10%;
+}
+
+.card {
+    border: 0;
+    border-radius: 1rem;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.card-body .text-center {
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.btn {
+    background-color: #4e73df;
+    color: #ffffff;
+}
+
+.btn:hover {
+    background-color: #224abe;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .container {
+        margin-top: 5%;
+    }
+}

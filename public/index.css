@@ -37,6 +37,13 @@
     text-align: center;
     color: var(--text-light);
 }
+.custom-form-field {
+    color: #d1d5db; /* Add the color you want */
+}
+
+.custom-result {
+    color: #d1d5db; /* Color: #d1d5db */
+}
 
 .btn {
     padding: 1rem 2rem;
@@ -473,6 +480,41 @@ nav {
     align-items: flex-start;
     gap: 1rem;
 }
+.user-card {
+    background-color: var(--primary-color-light);
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.user-card h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+}
+
+.user-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+}
+
+.info-item {
+    margin-bottom: 1rem;
+}
+
+.info-label {
+    font-weight: 500;
+    color: var(--secondary-color);
+    display: block;
+}
+
+.info-value {
+    color: var(--white);
+}
+
 
 .review__member img {
     max-width: 60px;
@@ -629,6 +671,98 @@ nav {
         flex-direction: column;
         gap: 0;
     }
+<style>
+:root {
+    /* Your existing root styles */
+}
+
+    body {
+        /* Your existing body styles */
+    }
+
+    nav {
+        /* Your existing nav styles */
+    }
+
+    .nav__logo {
+        /* Your existing nav__logo styles */
+    }
+
+    .nav__links {
+        /* Your existing nav__links styles */
+    }
+
+    .link a {
+        /* Your existing link a styles */
+    }
+
+    .link a::after {
+        /* Your existing link a::after styles */
+    }
+
+    .header__container {
+        /* Your existing header__container styles */
+    }
+
+    .header__blur {
+        /* Your existing header__blur styles */
+    }
+
+    .header__content h4 {
+        /* Your existing header__content h4 styles */
+    }
+
+    .header__content h1 {
+        /* Your existing header__content h1 styles */
+    }
+
+    .header__content h1 span {
+        /* Your existing header__content h1 span styles */
+    }
+
+    .header__content p {
+        /* Your existing header__content p styles */
+    }
+
+    .header__image {
+        /* Your existing header__image styles */
+    }
+
+    .header__image::before {
+        /* Your existing header__image::before styles */
+    }
+
+    .header__image img {
+        /* Your existing header__image img styles */
+    }
+
+    /* ... Include the rest of your existing CSS styles ... */
+
+    /* New styles for the form input */
+    form {
+        margin-top: 1rem;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    input {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        border: 1px solid var(--secondary-color);
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    button.btn {
+        /* Your existing button styles */
+    }
+
+    /* Add more styles as needed */
+
 
     .review__footer {
         flex-direction: column;
