@@ -128,7 +128,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @param int|null $id
      * @param string|null $nom
      * @param string|null $prenom
-     * @param \DateTimeInterface|null $date_naissance
+     * @param \DateTimeImmutable|null $date_naissance
      * @param string|null $cin
      * @param string|null $email
      * @param string|null $password

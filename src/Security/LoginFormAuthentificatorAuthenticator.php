@@ -52,11 +52,15 @@ class LoginFormAuthentificatorAuthenticator extends AbstractLoginFormAuthenticat
         if(in_array('ROLE_ADHERANT', $user->getRoles(),true)) {
             return new RedirectResponse($this->urlGenerator->generate('adherantdashboard'));
         }
+
+        if(in_array('ROLE_ADMIN', $user->getRoles(),true)) {
+            return new RedirectResponse($this->urlGenerator->generate('admin'));
+        }
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
 
-         return new RedirectResponse($this->urlGenerator->generate('app_coach_index'));
+         return new RedirectResponse($this->urlGenerator->generate('app_home_index'));
         // For example:w
         // return new RedirectResponse($this->urlGenerator->generate('some_route'));
 

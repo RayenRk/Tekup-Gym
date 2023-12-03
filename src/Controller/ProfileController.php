@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProfileController extends AbstractController
 {
-        #[Route('/dherantdash', name: 'adherantdashboard', methods: ['GET'])]
+        #[Route('/adherantdash', name: 'adherantdashboard', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
         $user = $this->getUser();
