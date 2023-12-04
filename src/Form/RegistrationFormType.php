@@ -39,19 +39,20 @@ class RegistrationFormType extends AbstractType
         ])
 
         ->add('roles', ChoiceType::class, [
+            'label' => 'User Type',
             'choices' => [
                 'Coach' => 'ROLE_COACH',
                 'Adherant' => 'ROLE_ADHERANT',
-                // Add other roles as needed
+
             ],
+            'expanded' => false,
             'multiple' => true,
-            'required' => false, // Allow the field to be empty
-            'empty_data' => [], // Default value if the field is empty
         ])
 
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
+                'label' => 'Password',
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [

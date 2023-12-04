@@ -6,9 +6,7 @@
     {{parent()}}
 
     <link rel="stylesheet" href="{{ asset("assets/adminLte/css/adminlte.css") }}">
-    <link rel="stylesheet" href="{{ asset("assets/app.js") }}">
     <link rel="stylesheet" href="{{ asset("assets/adminLte/css/adminlte.css.map") }}">
-    <script src="{{ asset("assets/app.js") }}"></script>
     <link rel="stylesheet"  href="{{ asset("assets/styles/sb-admin.css") }}">
 
 
@@ -51,7 +49,7 @@
                                             <h1 class="h4 text-gray-900 mb-4">Se connecter</h1>
                                         </div>
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control" value="{{ last_username }}" id="inputEmail" required autofocus>
+                                            <input type="email" name="email" class="form-control"  placeholder="Email" value="{{ last_username }}" id="inputEmail" required autofocus>
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password" required>
@@ -61,13 +59,6 @@
                                         <button class="btn btn-block" type="submit">
                                             Se connecter
                                         </button>
-                                        <hr>
-                                        <div class="text-center">
-                                            <a class="small" href="#">Mot de passe oublié?</a>
-                                        </div>
-                                        <div class="text-center">
-                                            <a class="small" href="{{path('app_register')}}">creer compte </a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>

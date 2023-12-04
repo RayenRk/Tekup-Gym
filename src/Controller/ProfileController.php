@@ -26,7 +26,7 @@ class ProfileController extends AbstractController
         $user = $this->getUser();
 
 
-        return $this->render('Dashboard/userdashboard.html.twig', [
+        return $this->render('coachdashboard.html.twig', [
             'user' => $user,
         ]);
 

@@ -8,7 +8,7 @@
             rel="stylesheet"
     />
 
-    <link rel="stylesheet" type="text/css" href="{{ asset("index.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset("dashboardcoach.css") }}">
     <title>Profile {{ app.user.prenom }}</title>
 </head>
 <body>
@@ -35,7 +35,19 @@
             </a>
         {% endif %}
     </nav>
-<div class="container">
+    <div class="col-md-4">
+        <div class="panel">
+            <h2>Quick Links</h2>
+            <ul class="panel-links">
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <!-- Add more links as needed -->
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
 <div class="user-card">
     <h1>Profil adhérent</h1>
 

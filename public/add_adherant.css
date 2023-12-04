@@ -60,6 +60,7 @@ form .input-box span.details {
     margin-bottom: 5px;
 }
 
+
 .user-details .input-box input,
 .user-details .input-box select {
     height: 45px;
@@ -146,3 +147,22 @@ form .button input:hover {
 .input-box-gender input:valid {
     border-color: #9b59b6;
 }
+.form-group {
+    margin-bottom: 15px;
+}
+
+.control-label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.modern-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
