@@ -17,6 +17,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use SebastianBergmann\CodeCoverage\Report\Text;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -50,7 +51,7 @@ class UserCrudController extends AbstractCrudController
             ->setEntityLabelInPlural("Users")
             ->setEntityLabelInSingular("User")
             ->setPageTitle("index","Tek-up Gym - Administration of Users")
-            ->setPaginatorPageSize(10);
+            ->setPaginatorPageSize(9);
     }
 
 
@@ -62,8 +63,9 @@ class UserCrudController extends AbstractCrudController
             TextField::new('nom'),
             TextField::new("prenom"),
             DateField::new("date_naissance"),
-            IntegerField::new("cin"),
-            TextField::new("email"),
+            TextField::new("cin"),
+            TextField::new("email")
+            ->setRequired($pageName === Crud::PAGE_NEW),
             ArrayField::new("roles")
             ];
 
@@ -72,11 +74,12 @@ class UserCrudController extends AbstractCrudController
                 ->setFormTypeOptions([
                     'type' => PasswordType::class,
                     'first_options' => ['label' => 'Password'],
-                    'second_options' => ['label' => '(Repeat)'],
+                    'second_options' => ['label' => 'Repeat Password'],
                     'mapped' => false,
                 ])
-                ->setRequired($pageName === Crud::PAGE_NEW)
                 ->onlyOnForms()
+                ->setRequired($pageName === Crud::PAGE_NEW)
+
             ;
 
         $fields[] = $password;
