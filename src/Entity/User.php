@@ -25,8 +25,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 100, nullable: true)]
     protected ?string $prenom = null;
 
-    #[ORM\Column(type: "date_immutable", nullable: true)]
+    #[ORM\Column(type: "date", nullable: true)]
     protected ?\DateTimeInterface $date_naissance = null;
+
 
     #[ORM\Column(type: "bigint", nullable: true)]
     protected ?string $cin = null;

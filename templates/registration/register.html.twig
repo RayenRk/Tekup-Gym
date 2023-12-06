@@ -18,7 +18,7 @@
         }
 
         .card {
-            width: 500px;
+            width: 700px;
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -130,87 +130,147 @@
             pointer-events: none;
             color: #555;
         }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
 
-        .custom-label {
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
             font-weight: bold;
-            margin-bottom: 5px;
-            display: block;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
 
     </style>
-    <title>Formulare de Connexion</title>
+    <title>Register</title>
 </head>
 <body>
-
 <div class="card">
     <img src="{{ asset('img/logo.jpg') }}" alt="Gym Image">
     <h2>Inscription</h2>
+    <br>
     <div class="alert alert-danger" id="alertEmpty" role="alert">
         Veuillez remplir tous les champs.
     </div>
-
-    <form method="post" action="{{ path('app_register') }}">
-        <div class="input-group">
-            <div class="input-half">
-                {{ form_row(registrationForm.nom, {'attr': {'class': 'input-half', 'placeholder': 'nom'}}) }}            </div>
-            <div class="input-half">
-                <input type="text" id="prenom" name="prenom" placeholder="Prénom" required>
-            </div>
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSuccessModal()">&times;</span>
+            <p>Inscription réussie!</p>
+            <!-- Additional content or styling can be added here -->
         </div>
-        <div class="input-group">
-            <div class="input-half">
-                <input type="email" id="email" name="email" placeholder="Email" required>
+    </div>
+    <form method="post" onsubmit="register()" action="{{ path('app_register') }} " >
+
+        <div class="content">
+            {{ form_errors(registrationForm) }}
+
+            {{ form_start(registrationForm) }}
+
+            <div class="input-group">
+                <div class="input-half">
+                    {{ form_label(registrationForm.prenom, 'First Name', {'label_attr': {'class': 'custom-label'}}) }}
+                    {{ form_widget(registrationForm.prenom, {'attr': {'class': 'custom-input', 'placeholder': 'First Name'}}) }}
+                </div>
+
+                <div class="input-half">
+                    {{ form_label(registrationForm.nom, 'Last Name', {'label_attr': {'class': 'custom-label'}}) }}
+                    {{ form_widget(registrationForm.nom, {'attr': {'class': 'custom-input', 'placeholder': 'Last Name'}}) }}
+                </div>
             </div>
-            <div class="input-half">
-                <input type="password" id="plainPassword" name="plainPassword" placeholder="Password" required>
+
+            <div class="input-group">
+                <div class="input-half">
+                    {{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'custom-label'}}) }}
+                    {{ form_widget(registrationForm.email, {'attr': {'class': 'custom-input', 'placeholder': 'Email'}}) }}
+                </div>
+
+                <div class="input-half">
+                    {{ form_label(registrationForm.plainPassword, 'Password', {'label_attr': {'class': 'custom-label'}}) }}
+                    {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'custom-input', 'placeholder': 'Password'}}) }}
+                </div>
             </div>
+
+            <div class="input-group">
+                <div class="input-half">
+                    {{ form_label(registrationForm.cin, 'ID Number', {'label_attr': {'class': 'custom-label'}}) }}
+                    {{ form_widget(registrationForm.cin, {'attr': {'class': 'custom-input', 'placeholder': 'ID Number'}}) }}
+                </div>
+
+                <div class="input-half">
+                    {{ form_label(registrationForm.date_naissance, 'Date of Birth', {'label_attr': {'class': 'custom-label'}}) }}
+                    {{ form_widget(registrationForm.date_naissance, {'attr': {'class': 'custom-input', 'placeholder': 'Date of Birth'}}) }}
+                </div>
+            </div>
+
+            <div class="input-group">
+
+                    {{ form_widget(registrationForm.roles)}}
+
+            </div>
+
+
+            <button type="submit" class="btn ">Register</button>
+
+
+
+            {{ form_end(registrationForm) }}
         </div>
-        <div class="input-group">
-            <div class="input-half">
-                <input type="text" id="cin" name="cin" placeholder="Cin" required>
-            </div>
-            <div class="input-half">
-                <input type="date" id="date_naissance" name="date_naissance" placeholder="Date De Naissance" required>
-            </div>
-        </div>
 
-        <div class="input-group custom-dropdown" id="roles">
-            <label for="{{ registrationForm.roles.vars.id }}" class="custom-label">Roles</label>
-            {{ form_widget(registrationForm.roles, {'attr': {'class': 'custom-select' }}) }}
-            {{ form_errors(registrationForm.roles) }}
-        </div>
-
-
-
-        <button class="btn" type="submit">Inscription</button>
     </form>
-    <br>
 
-    <p><a href="#">S'inscrire</a></p>
 </div>
 
-<script>
-    function register() {
-        var nom = document.getElementById("nom").value;
-        var prenom = document.getElementById("prenom").value;
-        var email = document.getElementById("email").value;
-        var password = document.getElementById("password").value;
-        var cin = document.getElementById("cin").value;
-        var dateNaissance = document.getElementById("dateNaissance").value;
-        var userType = document.getElementById("userType").value;
+<script>function register() {
+        var nom = document.getElementById("{{ registrationForm.nom.vars.id }}").value;
+        var prenom = document.getElementById("{{ registrationForm.prenom.vars.id }}").value;
+        var email = document.getElementById("{{ registrationForm.email.vars.id }}").value;
+        var password = document.getElementById("{{ registrationForm.plainPassword.vars.id }}").value;
+        var cin = document.getElementById("{{ registrationForm.cin.vars.id }}").value;
+        var dateNaissance = document.getElementById("{{ registrationForm.date_naissance.vars.id }}").value;
+        var userType = document.getElementById("{{ registrationForm.roles.vars.id }}").value;
 
         // Check if any field is empty
         if (!nom || !prenom || !email || !password || !cin || !dateNaissance || !userType) {
             document.getElementById("alertEmpty").style.display = "block";
-            return;
+            return false;
         }
 
-        // Add your registration logic here
-        // Example: Collect and validate the form data
+        // Show the success modal
+        document.getElementById("successModal").style.display = "block";
 
-        alert("Inscription réussie!");
         // Additional logic can be added here
+
+        return false; // Prevent form submission
     }
+
+    // Function to close the success modal
+    function closeSuccessModal() {
+        document.getElementById("successModal").style.display = "none";
+    }
+
 </script>
 </body>
 </html>

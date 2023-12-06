@@ -33,6 +33,7 @@ class RegistrationFormType extends AbstractType
             ->add('date_naissance', DateType::class, [
                 'label' => 'Date de naissance',
                 'widget' => 'single_text',
+
             ])
             ->add('cin', TextType::class, [
                 'label' => 'CIN',
@@ -52,20 +53,23 @@ class RegistrationFormType extends AbstractType
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                 ],
             ])
             ->add('roles', ChoiceType::class, [
-                'multiple' => true,
+                'multiple' => false,
                 'choices' => [
-                    'Coach' => "ROLE_COACH",
-                    'Adherant' => "ROLE_ADHERANT",
+                    'Coach' => 'ROLE_COACH',
+                    'Adherant' => 'ROLE_ADHERANT',
                 ],
-
                 'expanded' => false,
                 'label' => 'User Type',
+                'attr' => [
+                    'class' => 'custom-select', // Add your custom class here
+                ],
+                'placeholder'=> false,
+                'data'=> 'Coach'
             ]);
 
 
