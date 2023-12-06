@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use App\Repository\UserSECURITYRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -15,8 +14,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
-
-
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -28,10 +25,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 100, nullable: true)]
     protected ?string $prenom = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[ORM\Column(type: "date_immutable", nullable: true)]
     protected ?\DateTimeInterface $date_naissance = null;
 
-    #[ORM\Column(type: Types::BIGINT, nullable: true)]
+    #[ORM\Column(type: "bigint", nullable: true)]
     protected ?string $cin = null;
 
     #[ORM\Column(length: 100, nullable: true)]
@@ -39,19 +36,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 100, nullable: true)]
     protected ?string $password = null;
-    
-     #[ORM\Column(type:"json")]
 
+
+
+    #[ORM\Column(type: "json")]
     private array $roles = [];
+
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function setId(?int $id): void
-    {
-        $this->id = $id;
     }
 
     public function getNom(): ?string
@@ -124,22 +118,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->roles = $roles;
     }
 
-    /**
-     * @param int|null $id
-     * @param string|null $nom
-     * @param string|null $prenom
-     * @param \DateTimeImmutable|null $date_naissance
-     * @param string|null $cin
-     * @param string|null $email
-     * @param string|null $password
-     * @param array $roles
-     */
-    public function __construct()
-    {
-
-    }
-
-
     public function getUserIdentifier(): string
     {
         return (string) $this->email;
@@ -149,46 +127,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    // You may need to implement other required methods like `getSalt` and `equals`.
-
-
-
-
-    public function getAdherant(): ?Adherant
-    {
-        return $this->adherant;
-    }
-
-    public function setAdherant(?Adherant $adherant): static
-    {
-        $this->adherant = $adherant;
-
-        return $this;
-    }
-
-    public function getCoach(): ?Coach
-    {
-        return $this->coach;
-    }
-
-    public function setCoach(?Coach $coach): static
-    {
-        $this->coach = $coach;
-
-        return $this;
-    }
-
-    public function getAdministrator(): ?Administrator
-    {
-        return $this->administrator;
-    }
-
-    public function setAdministrator(?Administrator $administrator): static
-    {
-        $this->administrator = $administrator;
-
-        return $this;
     }
 }

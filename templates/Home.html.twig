@@ -24,16 +24,22 @@
         <li class="link"><a href="#">Community</a></li>
     </ul>
 
+
     {% if not app.user %}
         <a href="{{ path('app_login') }}">
-            <button class="btn">Customer Area</button>
+            <button class="btn">Login</button>
         </a>
+
     {% else %}
         {# Display the logout button if the user is logged in #}
         <a href="{{ path('app_logout') }}">
             <button class="btn">Logout</button>
         </a>
     {% endif %}
+    <a href="{{ path('app_register') }}">
+        <button class="btn">Register</button>
+    </a>
+
 </nav>
 
 <header class="section__container header__container">

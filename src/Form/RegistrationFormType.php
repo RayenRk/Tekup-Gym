@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -20,35 +21,25 @@ class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
+
         $builder
-        ->add('nom', TextType::class, [
-            'label' => 'Nom',
-        ])
-        ->add('prenom', TextType::class, [
-            'label' => 'Prénom',
-        ])
-        ->add('date_naissance', DateType::class, [
-            'label' => 'Date de naissance',
-            'widget' => 'single_text',
-        ])
-        ->add('cin', TextType::class, [
-            'label' => 'CIN',
-        ])
-        ->add('email', EmailType::class, [
-            'label' => 'Email',
-        ])
-
-        ->add('roles', ChoiceType::class, [
-            'choices' => [
-                'Coach' => 'ROLE_COACH',
-                'Adherant' => 'ROLE_ADHERANT',
-                // Add other roles as needed
-            ],
-            'multiple' => true,
-            'required' => false, // Allow the field to be empty
-            'empty_data' => [], // Default value if the field is empty
-        ])
-
+            ->add('nom', TextType::class, [
+                'label' => 'Nom',
+            ])
+            ->add('prenom', TextType::class, [
+                'label' => 'Prénom',
+            ])
+            ->add('date_naissance', DateType::class, [
+                'label' => 'Date de naissance',
+                'widget' => 'single_text',
+            ])
+            ->add('cin', TextType::class, [
+                'label' => 'CIN',
+            ])
+            ->add('email', EmailType::class, [
+                'label' => 'Email',
+            ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
@@ -65,7 +56,19 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+            ])
+            ->add('roles', ChoiceType::class, [
+                'multiple' => true,
+                'choices' => [
+                    'Coach' => "ROLE_COACH",
+                    'Adherant' => "ROLE_ADHERANT",
+                ],
+
+                'expanded' => false,
+                'label' => 'User Type',
             ]);
+
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

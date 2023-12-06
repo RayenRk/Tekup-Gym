@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends AbstractController
 {
-    #[Route('/adminbtn', name: 'app_admin')]
+        #[Route('/adminbtn', name: 'app_admin')]
     public function index(): Response
     {
         return $this->render('admin/adminbtn.html.twig', [
