@@ -17,7 +17,7 @@
         }
 
         .card {
-            width: 400px;
+            width: 450px;
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -94,11 +94,26 @@
             background-color: #f8d7da;
             border-color: #f5c6cb;
         }
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .back-button:hover {
+            transform: scale(1.2); /* Increase size on hover */
+        }
     </style>
     <title>Formulare de Connexion</title>
 </head>
 <body>
-<form method="post" class="user" novalidate>
+<a href="{{ path('app_home_index') }}" class="back-button">
+    <img src="{{ asset('img/previous.png') }}" alt="Back" style="width: 40px; height: 40px;">
+</a>
+
+<form method="post" class="user" novalidate onsubmit="login()">
 <div class="card">
     <img src="{{ asset('img/logo.jpg') }}" alt="Gym Image" class="mb-4">
     <h2 class="mb-4">Connexion</h2>
@@ -115,7 +130,7 @@
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
     </div>
     <button class="btn btn-block" type="submit">Connexion</button>
-    <p class="mt-3"><a href="{{path('app_register')}}" class="text-muted">S'inscrire</a> | <a href="#" class="text-muted">Réinitialiser le mot de passe</a></p>
+    <p class="mt-3"><a href="{{path('app_register')}}" class="text-muted">S'inscrire</a></p>
 </div>
 </form>
 
@@ -124,25 +139,28 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
-    function login() {
-        var username = document.getElementById("username").value;
-        var password = document.getElementById("password").value;
+
+        function login() {
+        var email = document.getElementById("inputEmail").value;
+        var password = document.getElementById("inputPassword").value;
 
         // Check if the fields are empty
-        if (username.trim() === "" || password.trim() === "") {
-            document.getElementById("alertEmpty").style.display = "block";
-            return;
-        }
+        if (email.trim() === "" || password.trim() === "") {
+        document.getElementById("alertEmpty").style.display = "block";
+        return false; // Prevent form submission
+    }
 
         // Add your login logic here
-        // Example: Check if the username and password are valid
+        // Example: Check if the email and password are valid
 
-        if (username === "example" && password === "password") {
-            alert("Connexion réussie!");
-        } else {
-            alert("Nom d'utilisateur ou mot de passe incorrect");
-        }
+        if (email === "example@example.com" && password === "password") {
+        alert("Connexion réussie!");
+    } else {
+        alert("Nom d'utilisateur ou mot de passe incorrect");
     }
+    }
+
+
 </script>
 </body>
 </html>
