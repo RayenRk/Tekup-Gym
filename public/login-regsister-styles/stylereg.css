@@ -21,9 +21,9 @@ body {
 h1 {
     font-style: normal;
     font-weight: 700;
-    font-size: 8.5rem;
-    line-height: 11.5rem;
-    margin-bottom: 10rem;
+    font-size: 6rem; /* Adjusted font size */
+    line-height: 8rem; /* Adjusted line height */
+    margin-bottom: 5rem; /* Adjusted margin */
 }
 
 .img-container {
@@ -61,30 +61,30 @@ h1 {
     position: relative;
 }
 
-.form-container > form {
-    max-width: 45rem;
+.form-container>form {
+    max-width: 50rem; /* Adjusted max-width */
     width: 100%;
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 1rem;
-    padding: 5rem 3rem;
+    padding: 2rem 1.5rem; /* Adjusted padding */
     z-index: 100;
 }
 
 .form-control {
     width: 100%;
-    padding: 1.5rem;
-    font-size: 2rem;
+    padding: 1rem;
+    font-size: 1.6rem;
     border: 2px solid #6c757d;
     border-radius: 8px;
     background-color: #f8f9fa;
     transition: border-color 0.3s, box-shadow 0.3s;
-    color: #000; /* Set the color to match the text color in your form */
+    color: #000;
 }
 
-
-.has-content + label {
+.has-content+label {
     display: none;
 }
+
 .form-control:focus {
     border-color: #007bff;
     box-shadow: 0 0 0 0.15rem rgba(0, 123, 255, 0.25);
@@ -92,7 +92,7 @@ h1 {
 
 .form-group {
     position: relative;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem; /* Adjusted margin */
 }
 
 .form-group label {
@@ -101,32 +101,31 @@ h1 {
     transform: translateY(-50%);
     left: 20px;
     color: #6c757d;
-    font-size: 1.6rem;
+    font-size: 1.4rem; /* Adjusted font size */
     transition: transform 0.3s, font-size 0.3s;
 }
 
 .form-group:focus-within label,
-.form-control:focus + label {
+.form-control:focus+label {
     transform: translateY(-90%);
     font-size: 1.2rem;
     color: #0c0101;
-    margin-top: -10px; /* Adjust this value to your preference */
+    margin-top: -10px;
 }
 
-.form-control:focus + label,
-.form-control:not(:placeholder-shown) + label {
+.form-control:focus+label,
+.form-control:not(:placeholder-shown)+label {
     display: none;
 }
 
-
 .btn {
     width: 100%;
-    padding: 2rem 0;
+    padding: 1.5rem 0;
     font-family: "Epilogue", sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-style: normal;
     line-height: 2rem;
-    margin-top: 4rem;
+    margin-top: 2rem;
 }
 
 .btn-dark {
@@ -136,8 +135,8 @@ h1 {
 }
 
 .larger-link a {
-    font-size: 2rem; /* Adjust the font size to your preference */
-    line-height: 2.5rem; /* Adjust the line height to your preference */
+    font-size: 1.6rem;
+    line-height: 2rem;
 }
 
 .fitness-woman {
@@ -183,13 +182,13 @@ h1 {
         left: 105%;
     }
     h1 {
-        font-size: 6rem;
+        font-size: 4rem; /* Adjusted font size */
     }
 }
 
 @media screen and (max-width: 400px) {
     h1 {
-        font-size: 5rem;
+        font-size: 3.5rem; /* Adjusted font size */
     }
 }
 
@@ -237,37 +236,7 @@ h1 {
     flex: 1;
     margin-right: 10px;
 }
-/* Select Styles */
-.custom-select {
-    width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 11px;
-    box-sizing: border-box;
-    color: #555;
-    background-color: #f8f8f8;
-    transition: 0.3s;
-    margin-bottom: 10px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
 
-.custom-select:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
-}
-
-.custom-select::after {
-    content: "\25BC";
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    pointer-events: none;
-    color: #555;
-}
 .error-message {
     color: #d9534f; /* Bootstrap's red color for danger alerts */
     background-color: #f2dede; /* Bootstrap's background color for danger alerts */

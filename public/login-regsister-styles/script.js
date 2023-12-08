@@ -1,34 +1,29 @@
 
-    const formOpenBtn = document.querySelector("#form-open");
-    const home = document.querySelector(".home");
-    const formContainer = document.querySelector(".form_container");
-    const formCloseBtn = document.querySelector(".form_close");
-    const signupBtn = document.querySelector("#signup");
-    const loginBtn = document.querySelector("#login");
-    const pwShowHide = document.querySelectorAll(".pw_hide");
+    function register() {
+    var nom = document.getElementById("{{ registrationForm.nom.vars.id }}").value;
+    var prenom = document.getElementById("{{ registrationForm.prenom.vars.id }}").value;
+    var email = document.getElementById("{{ registrationForm.email.vars.id }}").value;
+    var password = document.getElementById("{{ registrationForm.plainPassword.vars.id }}").value;
+    var cin = document.getElementById("{{ registrationForm.cin.vars.id }}").value;
+    var dateNaissance = document.getElementById("{{ registrationForm.date_naissance.vars.id }}").value;
+    var userType = document.getElementById("{{ registrationForm.roles.vars.id }}").value;
 
-    formOpenBtn.addEventListener("click", () => home.classList.add("show"));
-    formCloseBtn.addEventListener("click", () => home.classList.remove("show"));
+    // Check if any field is empty
+    if (!nom.trim() || !prenom.trim() || !email.trim() || !password.trim() || !cin.trim() || !dateNaissance.trim() || !userType.trim()) {
+    document.getElementById("alertEmpty").style.display = "block";
+    return false;
+}
 
-    pwShowHide.forEach((icon) => {
-    icon.addEventListener("click", () => {
-        let getPwInput = icon.parentElement.querySelector("input");
-        if (getPwInput.type === "password") {
-            getPwInput.type = "text";
-            icon.classList.replace("uil-eye-slash", "uil-eye");
-        } else {
-            getPwInput.type = "password";
-            icon.classList.replace("uil-eye", "uil-eye-slash");
-        }
-    });
-});
+    // Add additional validation logic here if needed
 
-    signupBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    formContainer.classList.add("active");
-});
+    // Show the success modal
+    document.getElementById("successModal").style.display = "block";
 
-    loginBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    formContainer.classList.remove("active");
-});
+    // Prevent form submission
+    return false;
+}
+
+    // Function to close the success modal
+    function closeSuccessModal() {
+    document.getElementById("successModal").style.display = "none";
+}

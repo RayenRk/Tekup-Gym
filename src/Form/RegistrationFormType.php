@@ -62,15 +62,12 @@ class RegistrationFormType extends AbstractType
                 'choices' => [
                     'Coach' => 'ROLE_COACH',
                     'Adherent' => 'ROLE_ADHERENT',
-
-                    // Add more roles as needed
                 ],
                 'attr' => [
                  'class' => 'custom-select',] // Add your custom class here
 
 
             ]);
-
         $builder->get('roles')
             ->addModelTransformer(new CallbackTransformer(
                 function ($tagsAsArray): string {

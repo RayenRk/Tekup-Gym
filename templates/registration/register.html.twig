@@ -1,300 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
-    <style>
-        /* General Styles */
-        body {
-            font-family: "Poppins", sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        /* Card Styles */
-        .card {
-            width: 600px;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            color: #444;
-            background-color: #fff;
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        .card img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 50%;
-            margin: 0 auto 20px; /* Center the image */
-            display: block;
-        }
-
-        /* Input Styles */
-        .input-group {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-
-        .input-half {
-            flex: 1;
-            margin-right: 10px;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            font-size: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 11px;
-            box-sizing: border-box;
-            color: #555;
-            background-color: #f8f8f8;
-            transition: 0.3s;
-            margin-bottom: 10px; /* Add margin to the bottom for spacing */
-        }
-
-        /* Button Styles */
-        .btn {
-            width: 90%;
-            height: 100%;
-            background-color: #007bff;
-            color: #fff;
-            padding: 15px 20px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #0056b3;
-        }
-
-        /* Link Styles */
-        a {
-            text-decoration: none;
-            color: #007bff;
-        }
-
-        a:hover {
-            color: #0056b3;
-        }
-
-        /* Alert Styles */
-        .alert {
-            display: none;
-            margin-bottom: 20px;
-        }
-
-        .alert-danger {
-            color: #721c24;
-            background-color: #f8d7da;
-            border-color: #f5c6cb;
-        }
-
-        /* Select Styles */
-        .custom-select {
-            width: 100%;
-            padding: 12px;
-            font-size: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 11px;
-            box-sizing: border-box;
-            color: #555;
-            background-color: #f8f8f8;
-            transition: 0.3s;
-            margin-bottom: 10px;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        }
-
-        .custom-select:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
-        }
-
-        .custom-select::after {
-            content: "\25BC";
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            transform: translateY(-50%);
-            pointer-events: none;
-            color: #555;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
-        .back-button {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .back-button:hover {
-            transform: scale(1.2); /* Increase size on hover */
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{{ asset("login-regsister-styles/stylereg.css") }}" rel="stylesheet" type="text/css" />
     <title>Register</title>
 </head>
+
 <body>
-<a href="{{ path('app_login') }}" class="back-button">
-    <img src="{{ asset('img/previous.png') }}" alt="Back" style="width: 40px; height: 40px;">
-</a>
 
-<div class="card">
-    <img src="{{ asset('img/logo.jpg') }}" alt="Gym Image">
-    <h2>Inscription</h2>
-    <br>
-    <div class="alert alert-danger" id="alertEmpty" role="alert">
-        Veuillez remplir tous les champs.
-    </div>
-    <div id="successModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeSuccessModal()"><img src="{{ asset('img/accept.png') }}"><br> <p>Inscription réussie!</p></span>
+<div class="form-container">
+
+    <!-- Top left link -->
+    <a href="{{ path('app_home_index') }}" class="back-button">
+        <img src="{{ asset('img/previous.png') }}" alt="Back" style="width: 40px; height: 40px;">
+    </a>
+
+    <form method="post">
+        <h1>Register</h1>
+        {{ form_errors(registrationForm) }}
+
+        {{ form_start(registrationForm) }}
+        <div class="form-group">
+            {{ form_label(registrationForm.nom) }}
+            {{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
         </div>
-    </div>
-    <form method="post" onsubmit="register()" action="{{ path('app_register') }} " >
 
-        <div class="content">
-            {{ form_errors(registrationForm) }}
-
-            {{ form_start(registrationForm) }}
-
-            <div class="input-group">
-                <div class="input-half">
-                    {{ form_label(registrationForm.prenom, 'First Name', {'label_attr': {'class': 'custom-label'}}) }}
-                    {{ form_widget(registrationForm.prenom, {'attr': {'class': 'custom-input', 'placeholder': 'First Name'}}) }}
-                </div>
-
-                <div class="input-half">
-                    {{ form_label(registrationForm.nom, 'Last Name', {'label_attr': {'class': 'custom-label'}}) }}
-                    {{ form_widget(registrationForm.nom, {'attr': {'class': 'custom-input', 'placeholder': 'Last Name'}}) }}
-                </div>
-            </div>
-
-            <div class="input-group">
-                <div class="input-half">
-                    {{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'custom-label'}}) }}
-                    {{ form_widget(registrationForm.email, {'attr': {'class': 'custom-input', 'placeholder': 'Email'}}) }}
-                </div>
-
-                <div class="input-half">
-                    {{ form_label(registrationForm.plainPassword, 'Password', {'label_attr': {'class': 'custom-label'}}) }}
-                    {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'custom-input', 'placeholder': 'Password'}}) }}
-                </div>
-            </div>
-
-            <div class="input-group">
-                <div class="input-half">
-                    {{ form_label(registrationForm.cin, 'ID Number', {'label_attr': {'class': 'custom-label'}}) }}
-                    {{ form_widget(registrationForm.cin, {'attr': {'class': 'custom-input', 'placeholder': 'ID Number'}}) }}
-                </div>
-
-                <div class="input-half">
-                    {{ form_label(registrationForm.date_naissance, 'Date of Birth', {'label_attr': {'class': 'custom-label'}}) }}
-                    {{ form_widget(registrationForm.date_naissance, {'attr': {'class': 'custom-input', 'placeholder': 'Date of Birth'}}) }}
-                </div>
-            </div>
-
-            <div class="input-group">
-
-                    {{ form_widget(registrationForm.roles)}}
-
-            </div>
-
-
-            <button type="submit" class="btn ">Register</button>
-
-
-
-            {{ form_end(registrationForm) }}
+        <div class="form-group">
+            {{ form_label(registrationForm.prenom) }}
+            {{ form_widget(registrationForm.prenom, {'attr': {'class': 'form-control'}}) }}
         </div>
+
+        <div class="form-group">
+            {{ form_widget(registrationForm.date_naissance, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(registrationForm.cin) }}
+            {{ form_widget(registrationForm.cin, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(registrationForm.email) }}
+            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+
+            {# Check for email uniqueness constraint violation and display a custom message #}
+            {% if registrationForm.email.vars.errors|length > 0 %}
+                {% for error in registrationForm.email.vars.errors %}
+                    {% if error.messageTemplate == 'There is already an account with this email' %}
+                        <div class="error-message">{{ error.message }}</div>
+                    {% else %}
+                        <div class="error-message">An error occurred while processing your request.</div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+
+
+        <div class="form-group">
+            {{ form_label(registrationForm.plainPassword) }}
+            {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_widget(registrationForm.roles, {'attr': {'class': 'custom-select form-control'}}) }}
+        </div>
+
+        <button type="submit" class="btn btn-dark" >Register</button>
+        <p class="btn btn-dark larger-link"><a href="{{path('app_login')}}" class="custom-a">Login</a></p>
+
+        <div id="successModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeSuccessModal()"><img src="{{ asset('img/accept.png') }}"><br> <p>Inscription réussie!</p></span>
+            </div>
+        </div>
+        {{ form_end(registrationForm) }}
 
     </form>
 
+    <img src="{{ asset('images/header.png') }}" class="fitness-woman" />
 </div>
+<img src="{{ asset('images/gym-inside.webp') }}" class="img-container" />
 
-<script>
-    function register() {
-        var nom = document.getElementById("{{ registrationForm.nom.vars.id }}").value;
-        var prenom = document.getElementById("{{ registrationForm.prenom.vars.id }}").value;
-        var email = document.getElementById("{{ registrationForm.email.vars.id }}").value;
-        var password = document.getElementById("{{ registrationForm.plainPassword.vars.id }}").value;
-        var cin = document.getElementById("{{ registrationForm.cin.vars.id }}").value;
-        var dateNaissance = document.getElementById("{{ registrationForm.date_naissance.vars.id }}").value;
-        var userType = document.getElementById("{{ registrationForm.roles.vars.id }}").value;
 
-        // Check if any field is empty
-        if (!nom.trim() || !prenom.trim() || !email.trim() || !password.trim() || !cin.trim() || !dateNaissance.trim() || !userType.trim()) {
-            document.getElementById("alertEmpty").style.display = "block";
-            return false;
-        }
-
-        // Add additional validation logic here if needed
-
-        // Show the success modal
-        document.getElementById("successModal").style.display = "block";
-
-        // Prevent form submission
-        return false;
-    }
-
-    // Function to close the success modal
-    function closeSuccessModal() {
-        document.getElementById("successModal").style.display = "none";
-    }
-</script>
 
 </body>
+<script>
+
+</script>
 </html>
