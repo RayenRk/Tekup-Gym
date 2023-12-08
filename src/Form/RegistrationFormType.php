@@ -58,19 +58,31 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('roles', ChoiceType::class, [
-                'placeholder' => false,
+
                 'choices' => [
                     'Coach' => 'ROLE_COACH',
                     'Adherent' => 'ROLE_ADHERENT',
+
                     // Add more roles as needed
                 ],
-                'multiple' => true,
-                'expanded' => false,
                 'attr' => [
-                    'class' => 'custom-select', // Add your custom class here
-                ],
+                 'class' => 'custom-select',] // Add your custom class here
+
+
             ]);
 
+        $builder->get('roles')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($tagsAsArray): string {
+                    // transform the array to a string
+                    return implode(', ', $tagsAsArray);
+                },
+                function ($tagsAsString): array {
+                    // transform the string back to an array
+                    return explode(', ', $tagsAsString);
+                }
+            ))
+        ;
 
 
 
