@@ -61,7 +61,7 @@ class RegistrationFormType extends AbstractType
 
                 'choices' => [
                     'Coach' => 'ROLE_COACH',
-                    'Adherent' => 'ROLE_ADHERENT',
+                    'Adherent' => 'ROLE_ADHERANT',
                 ],
                 'attr' => [
                  'class' => 'custom-select',] // Add your custom class here

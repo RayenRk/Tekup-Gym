@@ -45,21 +45,43 @@
     color: #d1d5db; /* Color: #d1d5db */
 }
 
+/* Common styles for both login and register buttons */
+/* Common styles for both login and register buttons */
 .btn {
     padding: 1rem 2rem;
     outline: none;
     border: none;
     font-size: 1rem;
     color: var(--white);
-    background-color: var(--secondary-color);
     border-radius: 5px;
     cursor: pointer;
     transition: 0.3s;
+    display: flex;
+    align-items: center; /* Align text and icon vertically */
+    justify-content: center; /* Center text and icon horizontally */
+    margin-right: 3px;
 }
 
+/* Style for the login button */
+.btn-login {
+    background-color: var(--secondary-color);
+}
+
+/* Style for the register button */
+.btn-register {
+    background-color: var(--secondary-color); /* Change to your desired color */
+}
+
+/* Hover effect for both buttons */
 .btn:hover {
     background-color: var(--secondary-color-dark);
 }
+
+/* Icon styles */
+.btn i {
+    margin-right: 0.5rem; /* Adjust the space between text and icon */
+}
+
 
 img {
     width: 100%;
@@ -92,7 +114,7 @@ nav {
 }
 
 .nav__logo {
-    max-width: 150px;
+    max-width: 300px;
 }
 
 .nav__links {

@@ -12,60 +12,60 @@
     <title>Profile {{ app.user.prenom }}</title>
 </head>
 <body>
-    <nav>
-        <div class="nav__logo">
-            <a href="#"><img src="{{ asset('images/logo.png') }}" alt="logo" /></a>
-        </div>
-        <ul class="nav__links">
-            <li class="link"><a href="#">Home</a></li>
-            <li class="link"><a href="#">Program</a></li>
-            <li class="link"><a href="#">Service</a></li>
-            <li class="link"><a href="#">About</a></li>
-            <li class="link"><a href="#">Community</a></li>
-        </ul>
+<nav>
+    <div class="nav__logo">
+        <a href="#"><img src="{{ asset('images/logo.png') }}" alt="logo" /></a>
+    </div>
+    <ul class="nav__links">
+        <li class="link"><a href="#">Home</a></li>
+        <li class="link"><a href="#">Program</a></li>
+        <li class="link"><a href="#">Service</a></li>
+        <li class="link"><a href="#">About</a></li>
+        <li class="link"><a href="#">Community</a></li>
+    </ul>
 
-        {% if not app.user %}
-            <a href="{{ path('app_login') }}">
-                <button class="btn">Customer Area</button>
-            </a>
-        {% else %}
-            {# Display the logout button if the user is logged in #}
-            <a href="{{ path('app_logout') }}">
-                <button class="btn">Logout</button>
-            </a>
-        {% endif %}
-    </nav>
+    {% if not app.user %}
+        <a href="{{ path('app_login') }}">
+            <button class="btn">Customer Area</button>
+        </a>
+    {% else %}
+        {# Display the logout button if the user is logged in #}
+        <a href="{{ path('app_logout') }}">
+            <button class="btn">Logout</button>
+        </a>
+    {% endif %}
+</nav>
 <div class="container">
-<div class="user-card">
-    <h1>Profil adhérent</h1>
+    <div class="user-card">
+        <h1>Profil adhérent</h1>
 
-    {# Affichage des informations de l'utilisateur #}
-    <div class="user-info">
-        <div class="info-item">
-            <span class="info-label">Nom:</span>
-            <span class="info-value">{{ app.user.nom }}</span>
+        {# Affichage des informations de l'utilisateur #}
+        <div class="user-info">
+            <div class="info-item">
+                <span class="info-label">Nom:</span>
+                <span class="info-value">{{ app.user.nom }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Prénom:</span>
+                <span class="info-value">{{ app.user.prenom }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Date de naissance:</span>
+                <span class="info-value">{{ app.user.dateNaissance|date('Y-m-d') }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Email:</span>
+                <span class="info-value">{{ app.user.email }}</span>
+            </div>
+            {# Add more information items as needed #}
         </div>
-        <div class="info-item">
-            <span class="info-label">Prénom:</span>
-            <span class="info-value">{{ app.user.prenom }}</span>
-        </div>
-        <div class="info-item">
-            <span class="info-label">Date de naissance:</span>
-            <span class="info-value">{{ app.user.dateNaissance|date('Y-m-d') }}</span>
-        </div>
-        <div class="info-item">
-            <span class="info-label">Email:</span>
-            <span class="info-value">{{ app.user.email }}</span>
-        </div>
-        {# Add more information items as needed #}
-    </div>
 
-    <div class="calculate-imc">
-        <form action="{{ path('imccontroller') }}" method="GET">
-            <button class="btn" type="submit">Calculer IMC</button>
-        </form>
+        <div class="calculate-imc">
+            <form action="{{ path('imccontroller') }}" method="GET">
+                <button class="btn" type="submit">Calculer IMC</button>
+            </form>
+        </div>
     </div>
-</div>
 </div>
 {# ... #}
 </body>
