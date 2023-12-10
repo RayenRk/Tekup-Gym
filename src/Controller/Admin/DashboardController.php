@@ -2,10 +2,12 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Abonnement;
 use App\Entity\Adherant;
 use App\Entity\Categorie;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Menu\SubMenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
@@ -49,7 +51,12 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
        // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+
         yield MenuItem::linkToCrud('Users', 'fas fa-user', User::class);
-        yield MenuItem::linkToCrud('Category', 'fas fa-list-alt', Categorie::class);
+        yield MenuItem::linkToCrud('Categories', 'fas fa-list-alt', Categorie::class);
+        yield MenuItem::subMenu('Management', 'fas fa-list')->setSubItems([
+            MenuItem::linkToCrud('Abonnements','fas fa-list-alt',Abonnement::class)
+        ]);
+
     }
 }

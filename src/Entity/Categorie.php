@@ -18,8 +18,8 @@ class Categorie
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $nom_categorie = null;
 
-    #[ORM\ManyToMany(targetEntity: Abonnement::class, inversedBy: 'categories')]
-    private Collection $abonnement;
+    //#[ORM\ManyToMany(targetEntity: Abonnement::class, inversedBy: 'categories')]
+    //private Collection $abonnement;
 
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Coach::class)]
     private Collection $coaches;
@@ -27,11 +27,15 @@ class Categorie
     #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Abonnement::class)]
     private Collection $abonn;
 
+    #[ORM\OneToMany(mappedBy: 'categorie', targetEntity: Abonnement::class)]
+    private Collection $abonnements;
+
     public function __construct()
     {
         $this->abonnement = new ArrayCollection();
         $this->coaches = new ArrayCollection();
         $this->abonn = new ArrayCollection();
+        $this->abonnements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -133,5 +137,18 @@ class Categorie
         }
 
         return $this;
+    }
+
+    public function __toString():string
+    {
+        return $this->getNomCategorie();
+    }
+
+    /**
+     * @return Collection<int, Abonnement>
+     */
+    public function getAbonnements(): Collection
+    {
+        return $this->abonnements;
     }
 }
