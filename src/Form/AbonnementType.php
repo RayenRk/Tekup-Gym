@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Abonnement;
 use App\Entity\Adherant;
 use App\Entity\Categorie; // Make sure to include the correct namespace
+use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -29,11 +30,12 @@ class AbonnementType extends AbstractType
             ->add('prix', NumberType::class, [
                 'scale' => 2, // add this option if you want to allow decimal places
             ])
-            ->add('adherant', EntityType::class, [
-                'class' => Adherant::class,
-                'choice_label' => function($adherant){
-                    return $adherant ->getPrenom() . ' ' . $adherant ->getNom();}
-                ,
+            ->add('user', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'email',
+                //'choice_label' => function($user){
+                //  return $user ->getPrenom() . ' ' . $user ->getNom();}
+                //,
                 "expanded" =>false,
                 "multiple" =>false
 
