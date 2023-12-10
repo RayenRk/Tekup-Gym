@@ -50,6 +50,4 @@ class AbonnementCrudController extends AbstractCrudController
 
         ];
     }
-
-
 }
