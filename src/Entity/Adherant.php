@@ -8,14 +8,18 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AdherantRepository::class)]
-class Adherant extends User
+class Adherant
 {
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
     #[ORM\Column(length: 10, nullable: true)]
     private ?string $gender = null;
 
-    #[ORM\OneToMany(mappedBy: 'adherant', targetEntity: Abonnement::class)]
-    private Collection $abonnement;
+    //#[ORM\OneToMany(mappedBy: 'adherant', targetEntity: Abonnement::class)]
+    //private Collection $abonnement;
 
     #[ORM\OneToMany(mappedBy: 'adherant', targetEntity: Messagerie::class)]
     private Collection $messageries;
@@ -25,7 +29,7 @@ class Adherant extends User
 
     public function __construct()
     {
-        parent::__construct();
+       // parent::__construct();
         $this->abonnement = new ArrayCollection();
         $this->messageries = new ArrayCollection();
         $this->useradh = new ArrayCollection();

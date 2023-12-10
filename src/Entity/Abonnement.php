@@ -16,7 +16,13 @@ class Abonnement
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100, nullable: true)]
+    #[ORM\ManyToOne(inversedBy: 'abonnements')]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'abonnements')]
+    private ?Categorie $categorie = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $type = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
@@ -28,23 +34,33 @@ class Abonnement
     #[ORM\Column(nullable: true)]
     private ?float $prix = null;
 
-    #[ORM\ManyToOne(inversedBy: 'abonnement')]
-    private ?Adherant $adherant = null;
-
-    #[ORM\ManyToMany(targetEntity: Categorie::class, mappedBy: 'abonnement')]
-    private Collection $categories;
-
-    #[ORM\ManyToOne(inversedBy: 'abonn')]
-    private ?Categorie $categorie = null;
-
-    public function __construct()
-    {
-        $this->categories = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): static
+    {
+        $this->categorie = $categorie;
+
+        return $this;
     }
 
     public function getType(): ?string
@@ -95,54 +111,7 @@ class Abonnement
         return $this;
     }
 
-    public function getAdherant(): ?Adherant
-    {
-        return $this->adherant;
-    }
 
-    public function setAdherant(?Adherant $adherant): static
-    {
-        $this->adherant = $adherant;
 
-        return $this;
-    }
 
-    /**
-     * @return Collection<int, Categorie>
-     */
-    public function getCategories(): Collection
-    {
-        return $this->categories;
-    }
-
-    public function addCategory(Categorie $category): static
-    {
-        if (!$this->categories->contains($category)) {
-            $this->categories->add($category);
-            $category->addAbonnement($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Categorie $category): static
-    {
-        if ($this->categories->removeElement($category)) {
-            $category->removeAbonnement($this);
-        }
-
-        return $this;
-    }
-
-    public function getCategorie(): ?Categorie
-    {
-        return $this->categorie;
-    }
-
-    public function setCategorie(?Categorie $categorie): static
-    {
-        $this->categorie = $categorie;
-
-        return $this;
-    }
 }
