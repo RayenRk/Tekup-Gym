@@ -8,6 +8,7 @@ use App\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -21,7 +22,11 @@ class MessagerieType extends AbstractType
     {
         $builder
             ->add('contenu', TextType::class)
-            ->add('dateMessage')  // You may want to customize the date input type
+            ->add('dateMessage', DateTimeType::class, [
+                'data' => new \DateTime(), // Set the default value to the current date and time
+                'widget' => 'single_text', // Use a single text input for the date
+                'html5' => true, // Use HTML5 input types
+            ])
             ->add('coach', EntityType::class, [
                 'class' => User::class,
                 'choice_label' => 'email',

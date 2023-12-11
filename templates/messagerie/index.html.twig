@@ -1,15 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+< lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-            href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
-            rel="stylesheet"
-    />
-
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="{{ asset("index.css") }}">
     <title>Profile {{ app.user.prenom }}</title>
+    <style>
+        /* Add your specific styles here */
+        .messagerie-container {
+            max-width: 800px;
+            margin: 0 auto;
+            color: white; /* Set the font color to white */
+        }
+
+        .messagerie-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .messagerie-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .messagerie-table th, .messagerie-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            color: white; /* Set the font color to white */
+        }
+
+        .messagerie-create-link {
+            display: inline-block;
+            padding: 10px 15px;
+            background-color: var(--secondary-color);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+    </style>
 </head>
 <body>
 <nav>
@@ -39,35 +72,35 @@
     <div class="user-card">
 
         {% block body %}
-    <h1>Messagerie index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Contenu</th>
-                <th>Date_message</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for messagerie in messageries %}
-            <tr>
-                <td>{{ messagerie.id }}</td>
-                <td>{{ messagerie.contenu }}</td>
-                <td>{{ messagerie.dateMessage ? messagerie.dateMessage|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_messagerie_show', {'id': messagerie.id}) }}">show</a>
-                    <a href="{{ path('app_messagerie_edit', {'id': messagerie.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <div class="messagerie-container">
+                <h1 class="messagerie-title">Messagerie Index</h1>
 
-    <a href="{{ path('app_messagerie_new') }}">Create new</a>
-{% endblock %}
+                <table class="messagerie-table">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Contenu</th>
+                        <th>Date Message</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for messagerie in messageries %}
+                        <tr>
+                            <td>{{ messagerie.id }}</td>
+                            <td>{{ messagerie.contenu }}</td>
+                            <td>{{ messagerie.dateMessage ? messagerie.dateMessage|date('Y-m-d') : '' }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3">No records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <a class="messagerie-create-link" href="{{ path('app_messagerie_new') }}">Create new</a>
+            </div>
+        {% endblock %}
+
+</div>
