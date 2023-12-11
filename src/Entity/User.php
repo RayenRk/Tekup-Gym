@@ -13,7 +13,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserSECURITYRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -30,7 +29,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "date", nullable: true)]
     protected ?\DateTimeInterface $date_naissance = null;
 
-
     #[ORM\Column(type: "bigint", nullable: true)]
     protected ?string $cin = null;
 
@@ -40,19 +38,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 100, nullable: true)]
     protected ?string $password = null;
 
-
-
     #[ORM\Column(type: "json")]
     private array $roles = [];
 
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: Abonnement::class)]
     private Collection $abonnements;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Messagerie::class)]
+    private Collection $chatuser;
+
     public function __construct()
     {
         $this->abonnements = new ArrayCollection();
+        $this->chatuser = new ArrayCollection();
     }
-
 
     public function getId(): ?int
     {
@@ -169,8 +168,56 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
     public function __toString():string
     {
         return $this->getPrenom() ?? $this->getEmail();
     }
+
+    /**
+     * @return Collection<int, Messagerie>
+     */
+    public function getChatuser(): Collection
+    {
+        return $this->chatuser;
+    }
+
+    public function addChatuser(Messagerie $chatuser): static
+    {
+        if (!$this->chatuser->contains($chatuser)) {
+            $this->chatuser->add($chatuser);
+            $chatuser->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChatuser(Messagerie $chatuser): static
+    {
+        if ($this->chatuser->removeElement($chatuser)) {
+            // set the owning side to null (unless already changed)
+            if ($chatuser->getUser() === $this) {
+                $chatuser->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+        public function getReceivedMessages(): Collection
+        {
+            return $this->chatuser;
+        }
+
+        public function sendMessage(Coach $coach, string $content): void
+        {
+            $message = new Messagerie();
+            $message->setUser($this);
+            $message->setCoach($coach);
+            $message->setContenu($content);
+            $message->setDateMessage(new \DateTime());
+
+            $this->addChatuser($message);
+            $coach->addChatuser($message);
+        }
 }

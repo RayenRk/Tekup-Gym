@@ -62,6 +62,7 @@ class RegistrationFormType extends AbstractType
                 'choices' => [
                     'Coach' => 'ROLE_COACH',
                     'Adherent' => 'ROLE_ADHERANT',
+                   'Admin'=>'ROLE_ADMIN'
                    // 'Admin'=> 'ROLE_ADMIN'
                 ],
                 'attr' => [
@@ -81,6 +82,7 @@ class RegistrationFormType extends AbstractType
                 }
             ))
         ;
+
 
 
 

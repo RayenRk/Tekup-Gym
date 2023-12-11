@@ -11,12 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: "Coach")]
 class Coach extends User
 {
-
     #[ORM\Column(nullable: true)]
     private ?int $annee_experience = null;
 
-    #[ORM\OneToMany(mappedBy: 'coach', targetEntity: Messagerie::class)]
-    private Collection $messageries;
 
     #[ORM\ManyToOne(inversedBy: 'coaches')]
     private ?Categorie $categorie = null;
@@ -29,8 +26,6 @@ class Coach extends User
         $this->messageries = new ArrayCollection();
         $this->usercoh = new ArrayCollection();
     }
-
-
 
     public function getAnneeExperience(): ?int
     {
@@ -52,27 +47,6 @@ class Coach extends User
         return $this->messageries;
     }
 
-    public function addMessagery(Messagerie $messagery): static
-    {
-        if (!$this->messageries->contains($messagery)) {
-            $this->messageries->add($messagery);
-            $messagery->setCoach($this);
-        }
-
-        return $this;
-    }
-
-    public function removeMessagery(Messagerie $messagery): static
-    {
-        if ($this->messageries->removeElement($messagery)) {
-            // set the owning side to null (unless already changed)
-            if ($messagery->getCoach() === $this) {
-                $messagery->setCoach(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getCategorie(): ?Categorie
     {
@@ -115,4 +89,6 @@ class Coach extends User
 
         return $this;
     }
+
+
 }

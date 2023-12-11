@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Coach;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserSECURITYRepository;
@@ -30,7 +31,24 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            // Check if the user has the ROLE_COACH role
+            if (in_array('ROLE_COACH', $user->getRoles())) {
+                // If so, create a new Coach entity and associate it with the user
+                $coach = new Coach();
+                // Set any additional properties for the Coach entity
+                $coach->setName('Coach Name'); // Replace with actual properties
+
+                // Set the user for the coach
+                $coach->setUser($user);
+
+                // Persist the Coach entity
+                $entityManager->persist($coach);
+            }
+
+            // Persist the User entity
             $entityManager->persist($user);
+
+            // Flush changes to the database
             $entityManager->flush();
 
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
@@ -38,10 +56,9 @@ class UserController extends AbstractController
 
         return $this->render('user/new.html.twig', [
             'user' => $user,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
-
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {

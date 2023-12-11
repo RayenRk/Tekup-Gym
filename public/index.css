@@ -52,6 +52,7 @@
     outline: none;
     border: none;
     font-size: 1rem;
+    background-color: var(--secondary-color);
     color: var(--white);
     border-radius: 5px;
     cursor: pointer;
@@ -74,7 +75,7 @@
 
 /* Hover effect for both buttons */
 .btn:hover {
-    background-color: var(--secondary-color-dark);
+    background-color: var(--secondary-color);
 }
 
 /* Icon styles */

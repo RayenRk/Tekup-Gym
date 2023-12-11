@@ -17,14 +17,18 @@ class MessagerieController extends AbstractController
     #[Route('/', name: 'app_messagerie_index', methods: ['GET'])]
     public function index(MessagerieRepository $messagerieRepository): Response
     {
+        $messageries = $messagerieRepository->findAll();
+
         return $this->render('messagerie/index.html.twig', [
-            'messageries' => $messagerieRepository->findAll(),
+            'messageries' => $messageries,  // Make sure the variable name matches the one used in the template
         ]);
     }
 
     #[Route('/new', name: 'app_messagerie_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
+
+
         $messagerie = new Messagerie();
         $form = $this->createForm(MessagerieType::class, $messagerie);
         $form->handleRequest($request);
@@ -38,7 +42,7 @@ class MessagerieController extends AbstractController
 
         return $this->render('messagerie/new.html.twig', [
             'messagerie' => $messagerie,
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
